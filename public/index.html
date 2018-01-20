@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>To-Do App</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <!-- <script src="bootstrap_3.3.7/bootstrap-3.3.7-dist/js/jquery-1.11.3.min.js"></script> -->
+    <script src="bootstrap_3.3.7/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="bootstrap_3.3.7/bootstrap-3.3.7-dist/css/bootstrap.min.css" />
+    <!-- Optional Bootstrap theme -->
+    <link rel="stylesheet" href="bootstrap_3.3.7/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://www.gstatic.com/firebasejs/4.8.2/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.8.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.8.2/firebase-auth.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyCWfPBzMD2S8Z4WSzh9HIAYoaY28uyfpIE",
+            authDomain: "project-232da.firebaseapp.com",
+            databaseURL: "https://project-232da.firebaseio.com",
+            projectId: "project-232da",
+            storageBucket: "project-232da.appspot.com",
+            messagingSenderId: "707259586962"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class="navbar-brand">ToDoApp</div>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li id="signOut">
+
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+
+    <div id="parent-div" class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-4" id="column1">
+                <h1 id="heading"></h1>
+                <div id="emailCol"></div>
+
+
+                <div id="passCol"></div>
+
+
+                <span id="buttonCol1"></span>
+                <span id="buttonCol2"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="outer">
+        <div class="middle">
+            <div id="inner">
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+    <!--  <label>Email:
+            <input id="email" type="email" />
+        </label>
+        <br />
+        <label>Password:
+            <input id="pass" type="password" />
+        </label> -->
+
+
+    <!-- <div id="button-div"> -->
+    <!-- <button id="signUp" onclick="onSignUp()">SignUp</button> -->
+    <!-- </div> -->
+
+
+
+
+    
+
+    <script>
+
+
+        function openSignUp() {
+            document.getElementById("heading").innerHTML = `<h1>SignUp</h1> `;
+            document.getElementById("emailCol").innerHTML = `<label>Email:<input id="email" type="email" /></label>`;
+            document.getElementById("passCol").innerHTML = `<label>Pass:<input id="pass" type="password" /></label>`
+            document.getElementById("buttonCol1").innerHTML = `<button id="signUp" onclick="onSignUp()">Register</button>`;
+            document.getElementById("buttonCol2").innerHTML = `<button id="signIn" onclick="openSignIn()">Login</button>`;
+        }
+        function openSignIn() {
+            document.getElementById("parent-div").className = "container";
+            document.getElementById("heading").innerHTML = `<h1>SignIn</h1> `;
+            document.getElementById("emailCol").innerHTML = `<label>Email:<input id="email" type="email" /></label>`;
+            document.getElementById("passCol").innerHTML = `<label>Pass:<input id="pass" type="password" /></label>`
+            document.getElementById("buttonCol1").innerHTML = `<button id="signUp" onclick="openSignUp()">Register</button>`;
+            document.getElementById("buttonCol2").innerHTML = `<button id="signIn" onclick="onSignIn()">Login</button>`
+            document.getElementById("signOut").innerHTML = ``;
+
+        }
+        function onSignUp() {
+            document.getElementById("inner").className = "loader";
+            document.getElementById("parent-div").className = "hidden";
+            var email = document.getElementById("email").value;
+            var pass = document.getElementById("pass").value;
+
+            firebase.auth().createUserWithEmailAndPassword(email, pass).then(user => {
+                document.getElementById("inner").className = "hidden";
+            }).catch((error) => {
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                document.getElementById("inner").className = "";
+                document.getElementById("parent-div").className = "container";
+                alert(errorMessage);
+
+            });
+
+        }
+        function onSignIn() {
+            document.getElementById("inner").className = "loader";
+            document.getElementById("parent-div").className = "hidden";
+
+            var email = document.getElementById("email").value;
+            var pass = document.getElementById("pass").value;
+            firebase.auth().signInWithEmailAndPassword(email, pass)
+                .then(user => {
+                    document.getElementById("inner").className = "hidden";
+                }).catch((error) => {
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    document.getElementById("inner").className = "";
+                    document.getElementById("parent-div").className = "container";
+                    alert(errorMessage);
+
+
+                });
+        }
+        /* function onSignIn() {
+            var promise = new Promise(function (resolve, reject) {
+
+                document.getElementById("inner").className = "loader";
+                document.getElementById("parent-div").className = "hidden";
+
+
+
+
+                resolve("spinner started");
+            });
+            var email = document.getElementById("email").value;
+            var pass = document.getElementById("pass").value;
+            firebase.auth().signInWithEmailAndPassword(email, pass).then(function (onFulfilled, onRejected) {
+                document.getElementById("inner").className = "hidden";
+            }).catch(function (error) {
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                document.getElementById("inner").className = "";
+                document.getElementById("parent-div").className = "container";
+                alert(errorMessage);
+
+
+            });
+
+
+
+        }
+ */        function onSignOut() {
+            firebase.auth().signOut();
+        }
+
+        function initApp() {
+            firebase.auth().onAuthStateChanged(function (user) {
+                if (user) {
+                    console.log(user.uid);
+                    localStorage.setItem("userId", user.uid);
+                    var displayName = user.displayName;
+                    var email = user.email;
+                    console.log(displayName);
+                    console.log(email);
+                    document.getElementById("parent-div").className = "container";
+                    document.getElementById("heading").innerHTML = `<h1>SignIn successfully</h1> `;
+                    document.getElementById("emailCol").innerHTML = ``;
+                    document.getElementById("passCol").innerHTML = ``;
+                    document.getElementById("buttonCol1").innerHTML = ``;
+                    document.getElementById("buttonCol2").innerHTML = ``;
+                    document.getElementById("signOut").innerHTML = `<a id="signOutBtn" class="active" onclick="onSignOut()">Logout</a>`
+                    window.location.replace("file:///media/shoaib/EEF8966BF8963237/shoaib/UIT/ToDoApp/public/todo.html");
+
+                }
+                else {
+                    document.getElementById("parent-div").className = "container";
+                    document.getElementById("heading").innerHTML = `<h1>SignIn</h1> `;
+                    document.getElementById("emailCol").innerHTML = `<label>Email:<input id="email" type="email" /></label>`;
+                    document.getElementById("passCol").innerHTML = `<label>Pass:<input id="pass" type="password" /></label>`
+                    document.getElementById("buttonCol1").innerHTML = `<button id="signUp" onclick="openSignUp()">Register</button>`;
+                    document.getElementById("buttonCol2").innerHTML = `<button id="signIn" onclick="onSignIn()">Login</button>`
+                    document.getElementById("signOut").innerHTML = ``;
+                }
+            });
+
+        }
+        window.onload = function () {
+            initApp();
+        }
+    </script>
+</body>
+
+</html>

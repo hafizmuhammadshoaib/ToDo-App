@@ -1,0 +1,115 @@
+body{
+    background-color: #eff1f9;
+    opacity: 1;
+   
+}
+.row{
+    width:100%;
+    margin: 0 auto;
+}
+#column1{
+    
+    margin: 0 auto;
+    background-color: #FDFDFD;
+    border-style: outset;
+    
+
+    padding: 40px;
+}
+
+label{
+    width: 50%;
+} 
+input{
+    width: 200%;
+}
+#signUp{
+    width:75px;
+    background-color: coral;
+    color: #ffffff;
+    font-weight: bold;
+    font-family: sans-serif;
+    text-align: center;
+    padding-right: 10px;
+    padding-left: 8px;
+    padding-top: 3px;
+    padding-bottom: 5px;
+    border-color: coral;
+}
+#signIn{
+    width:69px;
+    background-color:#2196F3;
+    color: #ffffff;
+    font-weight: bold;
+    font-family: sans-serif;
+    text-align: center;
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-top: 3px;
+    padding-bottom: 5px;
+    border-color: #2196F3;
+}
+#buttonCol1{
+    float: left;
+}
+#buttonCol2{
+    float: right;
+}
+h1{
+    text-align: center;
+}
+input{
+
+    border-bottom-color: gray;
+    border-top-style: hidden;
+    border-left-style: hidden;
+
+}
+#signOutBtn{
+    width:69px;
+    background-color:#2196F3;
+    color: #ffffff;
+    font-weight: bold;
+    font-family: sans-serif;
+    text-align: center;
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-top: 3px;
+    padding-bottom: 5px;
+    border-color: #2196F3;
+}
+
+
+
+.loader {
+    border: 16px solid #f3f3f3;
+    border-top: 16px solid #3498db;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 0.5s linear infinite;
+    margin: 0 auto;
+    line-height: 1000px;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+
+}
+
+.outer {
+    display: table;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.middle {
+    display: table-cell;
+    vertical-align: middle;
+}

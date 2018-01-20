@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>To-Do App</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <!-- <script src="bootstrap_3.3.7/bootstrap-3.3.7-dist/js/jquery-1.11.3.min.js"></script> -->
+    <script src="bootstrap_3.3.7/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="bootstrap_3.3.7/bootstrap-3.3.7-dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="bootstrap_3.3.7/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="todo.css" />
+    <!-- <link rel="stylesheet" href="style.css"/> -->
+
+    <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.8.2/firebase-auth.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyCWfPBzMD2S8Z4WSzh9HIAYoaY28uyfpIE",
+            authDomain: "project-232da.firebaseapp.com",
+            databaseURL: "https://project-232da.firebaseio.com",
+            projectId: "project-232da",
+            storageBucket: "project-232da.appspot.com",
+            messagingSenderId: "707259586962"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+
+</head>
+
+<body>
+    <nav class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class="navbar-brand">ToDoApp</div>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li id="user">
+
+                    </li>
+                    <li id="signOut">
+
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- <div class="splash"> -->
+    <h1>To-Do App</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <input id="taskInput" type="text" placeholder="Entet Task.." />
+                <input id="addButton" class="btn btn-success btn-sm" type="submit" value="Add" />
+            </div>
+            <!-- <div class="col-md-4 col-sm-4">
+                
+            </div> -->
+            <!-- </div> -->
+        </div>
+        <!-- </div> -->
+
+
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <ul id="list">
+
+                    <!-- <li> <span>first task</span><input type='submit' value='update' class='update' onclick="update()"/><input type='submit' value='delete' class='delete' /></li> -->
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="todo.js"></script>
+</body>
+
+</html>
