@@ -22,7 +22,7 @@ function initApp() {
       document.getElementById("signOut").innerHTML = `<a id="signOutBtn" class="active " onclick="onSignOut()">Logout</a>`;
     }
     else {
-      window.location.href = "file:///media/shoaib/EEF8966BF8963237/shoaib/UIT/ToDoApp/public/index.html"
+      window.location.replace("./index.html");
     }
   });
 }
