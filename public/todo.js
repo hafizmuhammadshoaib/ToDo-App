@@ -1,11 +1,5 @@
-/* var id=(function(){
-  var counter=0;
-  return function(){return ++counter;}
-})(); */
-
-
 //referencing to firebase
-var userId=localStorage.getItem("userId");
+var userId = localStorage.getItem("userId");
 var ref = firebase.database().ref().child(`Tasks/user/${userId}`);
 window.onload = function () {
   initApp();
@@ -15,9 +9,9 @@ function initApp() {
     if (user) {
       console.log("in user");
       // userId = user.uid;
-      
-      document.getElementById("user").innerHTML=`<a>${user.email}</a>`;
-     
+
+      document.getElementById("user").innerHTML = `<a>${user.email}</a>`;
+
 
       document.getElementById("signOut").innerHTML = `<a id="signOutBtn" class="active " onclick="onSignOut()">Logout</a>`;
     }
@@ -36,9 +30,14 @@ function onSignOut() {
 ref.on("value", function (snapshot) {
   console.log("in value");
   var taskArray = snapshot.val();
-  for (i = 0; i < taskArray.length; i++) {
-    console.log("in loop");
-    render(taskArray[i]);
+  try {
+    for (let i = 0; i < taskArray.length; i++) {
+      console.log("in loop");
+      render(taskArray[i]);
+    }
+  }
+  catch (err) {
+
   }
 });
 
@@ -55,10 +54,10 @@ addButton.addEventListener("click", function () {
   };
   inputText.value = "";
   ref.push(obj);
- 
+
 });
- //onTaskAdded
- ref.on("child_added", function (snapshot) {
+//onTaskAdded
+ref.on("child_added", function (snapshot) {
   render(snapshot);
 });
 
@@ -78,13 +77,22 @@ function render(data) {
 
   /*  */
   spanElement.innerHTML = obj.taskData;
-  spanElement.setAttribute("class","spanEle");
+  spanElement.setAttribute("class", "spanEle");
   console.log(obj.taskId);
   newLiElement.setAttribute("id", obj.taskId);
   newLiElement.setAttribute("class", "taskInsert");
-  newLiElement.innerHTML =
-    `<input type='submit' value='update' class='update btn btn-default' onclick='updateTask(this)'/> 
-    <input type='submit' value='delete' class='delete btn btn-danger' onclick='deleteTask(this)'/>`;
+  let delBtn = document.createElement("input");
+  let updateBtn = document.createElement("input");
+  updateBtn.setAttribute("type", "submit");
+  updateBtn.setAttribute("value", "update");
+  updateBtn.setAttribute("class", "update btn btn-default");
+  updateBtn.setAttribute("onclick", "updateTask(this)");
+  delBtn.setAttribute("type", "submit");
+  delBtn.setAttribute("value", "delete");
+  delBtn.setAttribute("class", "delete btn btn-danger");
+  delBtn.setAttribute("onclick", "deleteTask(this)");
+  newLiElement.appendChild(updateBtn);
+  newLiElement.appendChild(delBtn);
   newLiElement.appendChild(spanElement);
 
   ulElement.appendChild(newLiElement);
@@ -111,11 +119,12 @@ ref.on("child_changed", function (snapshot) {
   var ele = document.getElementById(snapshot.key);
   ele.children.item(2).innerHTML = snapshot.val().task;
 });
+//function to delete task
 function deleteTask(element) {
   ref.child(element.parentElement.id).remove();
-  
+
 }
-/* element.parentElement.remove(); */
+// get deleted child id from firebase
 ref.on("child_removed", function (snapshot) {
   var ele = document.getElementById(snapshot.key);
   ele.remove();
